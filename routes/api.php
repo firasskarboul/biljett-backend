@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,12 @@ Route::post('/user/forgot-password', [ResetPasswordController::class, 'forgotPas
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->middleware('guest')->name('password.reset');
 
 // USER PROTECTED APIs
+Route::resource('events', EventController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    // EVENT PROTECTED APIs
+
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
