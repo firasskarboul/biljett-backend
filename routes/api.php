@@ -34,17 +34,21 @@ Route::post('/email/verify/resend', function (Request $request) {
     return ['message', 'Verification link sent!'];
 })->middleware(['auth:api', 'throttle:6,1'])->name('verification.send');
 
+// Forgot and reset password
+
 Route::post('/user/forgot-password', [ResetPasswordController::class, 'forgotPassword'])->middleware('guest')->name('password.email');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->middleware('guest')->name('password.reset');
 
-// USER PROTECTED APIs
 Route::resource('events', EventController::class);
+Route::get('/events/search/{name}', [EventController::class, 'search']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // EVENT PROTECTED APIs
 
+    // Route::resource('events', EventController::class);
+
+    // USER PROTECTED APIs
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
 });

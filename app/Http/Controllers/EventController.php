@@ -56,7 +56,10 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+        $event->update($request->all());
+
+        return $event;
     }
 
     /**
@@ -67,6 +70,17 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Event::destroy($id);
+    }
+
+    /**
+     * Search for an event by Title.
+     *
+     * @param  string  $title
+     * @return \Illuminate\Http\Response
+     */
+    public function search($title)
+    {
+        return Event::where('title', 'like', '%'.$title.'%')->get();
     }
 }
