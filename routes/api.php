@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +40,13 @@ Route::post('/email/verify/resend', function (Request $request) {
 Route::post('/user/forgot-password', [ResetPasswordController::class, 'forgotPassword'])->middleware('guest')->name('password.email');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->middleware('guest')->name('password.reset');
 
-Route::resource('events', EventController::class);
-Route::get('/events/search/{name}', [EventController::class, 'search']);
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // EVENT PROTECTED APIs
 
-    // Route::resource('events', EventController::class);
+    Route::resource('events', EventController::class);
+    Route::resource('tickets', TicketController::class);
+    Route::get('/events/search/{name}', [EventController::class, 'search']);
 
     // USER PROTECTED APIs
 
