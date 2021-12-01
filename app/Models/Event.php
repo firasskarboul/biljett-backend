@@ -10,6 +10,10 @@ class Event extends Model
     use HasFactory;
     protected $fillable = [
         'organiser_id',
+        'category_id',
+        'tickets_qty',
+        'longitude',
+        'latitude',
         'title',
         'description',
         'event_photo',

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ticket;
+use App\Models\Category;
 
-class TicketController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return Ticket::all();
+        return Category::all();
     }
 
     /**
@@ -26,11 +26,10 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ticket_code' => 'required',
-            'user_id' => 'required',
-            'type_id' => 'required'
+            'name' => 'required',
+            'icon' => 'required'
         ]);
-        return Ticket::create($request->all());
+        return Category::create($request->all());
     }
 
     /**
@@ -41,7 +40,7 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        return Ticket::find($id);
+        return Category::find($id);
     }
 
     /**
@@ -53,10 +52,10 @@ class TicketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ticket = Ticket::find($id);
-        $ticket->update($request->all());
+        $category = Category::find($id);
+        $category->update($request->all());
 
-        return $ticket;
+        return $category;
     }
 
     /**
@@ -67,6 +66,6 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
-        return Ticket::destroy($id);
+        return Category::destroy($id);
     }
 }

@@ -3,10 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,11 +44,14 @@ Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassw
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    // EVENT PROTECTED APIs
+    // PROTECTED APIs
 
     Route::resource('events', EventController::class);
-    Route::resource('tickets', TicketController::class);
     Route::get('/events/search/{name}', [EventController::class, 'search']);
+    
+    Route::resource('tickets', TicketController::class);
+    Route::resource('types', TypeController::class);
+    Route::resource('categories', CategoryController::class);
 
     // USER PROTECTED APIs
 
