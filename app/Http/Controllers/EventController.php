@@ -83,4 +83,15 @@ class EventController extends Controller
     {
         return Event::where('title', 'like', '%'.$title.'%')->get();
     }
+
+    /**
+     * Search for an event by Category.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function searchByCat($id)
+    {
+        return Event::where('category_id', 'like', $id)->get();
+    }
 }

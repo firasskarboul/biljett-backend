@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::resource('events', EventController::class);
     Route::get('/events/search/{name}', [EventController::class, 'search']);
+    Route::get('/events/category/{id}', [EventController::class, 'searchByCat']);
     
     Route::resource('tickets', TicketController::class);
     Route::resource('types', TypeController::class);
